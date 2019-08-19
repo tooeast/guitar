@@ -1,46 +1,39 @@
 <template>
   <div class="hello">
-    <div class="hexuan">
-      <div class="hexuan-name">AM</div>
-      <table class="hexuan-table">
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
-    </div>
+    <chart :matrix="mixed" name="Am"></chart>
   </div>
 </template>
 
 <script>
+import chart from '@/components/chart.vue'
+
 export default {
   name: 'Main',
   props: {
     msg: String
+  },
+  components: {
+    chart
+  },
+  data () {
+    return {
+      mixed: [
+        [0, 1, 0, 1, 0, 0],
+        [0, 1, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0],
+        [1, 0, 0, 0, 0, 1]
+      ]
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+        this.mixed = [
+          [1],
+          [0, 1],
+          [0, 0, 1],
+          [0, 0, 0, 1]
+        ]
+    }, 2000)
   }
 }
 </script>
@@ -55,23 +48,91 @@ export default {
 
   .hexuan-name {
     font-size: 60px;
-
   }
 
-  .hexuan-table {
-    display: table;
+  .hexuan-wrapper {
+    position: relative;
     width: 100%;
-    // border: 1px solid red;
-    // box-sizing: border-box;
-    border-collapse: collapse;
-    // border-spacing: 10px;
+    box-sizing: border-box;
 
-    tr {
-      td {
-        height: 90px;
-        border: 2px solid gray;
+    .hexuan-table-wrapper {
+      width: 100%;
+
+      .hexuan-table {
+        display: inline-table;
+        // padding: 0 30px;
+        border-collapse: collapse;
+        border-top: 5px solid gray;
+        border-radius: 2px;
+
+        tr {
+          td {
+            width: 49px;
+            height: 90px;
+            border: 2px solid gray;
+          }
+        }
+      }
+    }
+
+    .hexuan-point-wrapper {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+
+      .hexuan-point {
+        display: inline-table;
+        // width: 100%;
+        border-collapse: collapse;
+        margin-top: 5px;
+
+        tr {
+          td {
+            position: relative;
+            width: 49px;
+            height: 90px;
+            border: 2px solid transparent;
+
+            &.select {
+              &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 20px;
+                height: 20px;
+                background-color: red;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+              }
+            }
+          }
+
+          // td.select {
+          //   position: relative;
+          //   height: 90px;
+          //   border: 2px solid transparent;
+
+          //   &::before {
+          //     content: '';
+          //     display: block;
+          //     position: absolute;
+          //     left: 50%;
+          //     top: 50%;
+          //     width: 20px;
+          //     height: 20px;
+          //     background-color: red;
+          //     border-radius: 50%;
+          //     transform: translate(-50%, -50%);
+          //   }
+          // }
+        }
       }
     }
   }
+
+
 }
 </style>
