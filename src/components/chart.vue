@@ -1,49 +1,51 @@
 <template>
-    <div class="hexuan">
-        <div class="hexuan-name" v-if="name">{{ name }}</div>
-        <div class="hexuan-wrapper">
-        <div class="hexuan-table-wrapper">
-            <table class="hexuan-table">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </table>
-        </div>
+  <div class="hexian">
+    <div class="hexian-name" v-if="name">{{ name }}</div>
+    <div class="hexian-wrapper">
+      <div class="hexian-table-wrapper">
+        <table class="hexian-table">
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
 
-        <div class="hexuan-point-wrapper">
-            <table class="hexuan-point">
-            <tr v-for="(todo, index) in realMatrix" :key="index">
-                <td v-for="(item, key) in todo" :key="key" :class="item ? 'select' : ''"></td>
-            </tr>
-            </table>
-        </div>
-        </div>
+      <div class="hexian-point-wrapper">
+        <table class="hexian-point">
+          <tr v-for="(todo, index) in realMatrix" :key="index">
+            <td v-for="(item, key) in todo" :key="key" :class="getClassName(item)" data-num="1"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="hexian-prefix">1</div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -55,13 +57,7 @@ export default {
         default: ''
     },
     matrix: {
-        type: Array,
-        default: [
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0]
-        ]
+        type: Array
     }
   },
   data() {
@@ -71,6 +67,7 @@ export default {
             [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0]
          ],
          realMatrix: []
       }
@@ -88,83 +85,157 @@ export default {
             })
         }
     }
+  },
+  methods: {
+    getClassName(item) {
+      return item > 0 ? 'select' : (item < 0 ? 'delete' : ''); 
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.hexuan {
+.hexian {
   position: relative;
-  width: 100%;
-  padding: 0 40px;
+  width: 360px;
+  padding: 0 20px;
+  margin: 0 auto;
   box-sizing: border-box;
 
-  .hexuan-name {
+  .hexian-name {
     font-size: 60px;
   }
 
-  .hexuan-wrapper {
+  .hexian-wrapper {
     position: relative;
     width: 100%;
     box-sizing: border-box;
+    // margin-left: 20px;
 
-    .hexuan-table-wrapper {
+    .hexian-table-wrapper {
       width: 100%;
+      padding: 0 26.5px;
+      box-sizing: border-box;
 
-      .hexuan-table {
+      .hexian-table {
         display: inline-table;
-        // padding: 0 30px;
+        width: 100%;
+        margin-top: 35px;
         border-collapse: collapse;
         border-top: 5px solid gray;
         border-radius: 2px;
 
         tr {
           td {
-            width: 49px;
-            height: 90px;
+            // width: 49px;
+            height: 80px;
             border: 2px solid gray;
           }
         }
       }
     }
 
-    .hexuan-point-wrapper {
+    .hexian-point-wrapper {
       position: absolute;
       left: 0;
       top: 0;
       width: 100%;
 
-      .hexuan-point {
+      .hexian-point {
         display: inline-table;
-        // width: 100%;
+        width: 100%;
         border-collapse: collapse;
-        margin-top: 5px;
+        // margin-top: 5px;
 
         tr {
+          &:first-child {
+            td {
+              position: relative;
+              width: 49px;
+              height: 35px;
+              border: 2px solid transparent;
+
+              &.select {
+                &::before {
+                  content: '';
+                  display: block;
+                  position: absolute;
+                  left: 50%;
+                  top: 0;
+                  width: 28px;
+                  height: 28px;
+                  background-color: #fff;
+                  border: 1px solid gray;
+                  border-radius: 50%;
+                  transform: translateX(-50%);
+                }
+              }
+
+              &.delete {
+                &::before, &::after {
+                  content: '';
+                  display: block;
+                  position: absolute;
+                  left: 50%;
+                  top: 15px;
+                  width: 32px;
+                  height: 2px;
+                  background-color: gray;
+                }
+
+                &::before {
+                  transform: rotate(45deg) translateX(-50%);
+                  transform-origin: left;
+                }
+
+                &::after {
+                  transform: rotate(-45deg) translateX(-50%);
+                  transform-origin: left;
+                }
+              }
+            }
+          }
+
           td {
             position: relative;
-            width: 49px;
-            height: 90px;
+            // width: 49px;
+            height: 80px;
             border: 2px solid transparent;
 
             &.select {
               &::before {
-                content: '';
+                content: attr(data-num);
                 display: block;
                 position: absolute;
                 left: 50%;
                 top: 50%;
-                width: 20px;
-                height: 20px;
+                width: 30px;
+                height: 30px;
                 background-color: red;
                 border-radius: 50%;
                 transform: translate(-50%, -50%);
+                color: #fff;
+                text-align: center;
+                line-height: 30px;
+                font-weight: bold;
+                font-size: 20px;
               }
             }
           }
         }
       }
+    }
+
+    .hexian-prefix {
+      position: absolute;
+      left: -15px;
+      top: 45px;
+      width: 30px;
+      height: 40px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
     }
   }
 }

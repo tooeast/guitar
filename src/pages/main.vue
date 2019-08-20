@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <chart :matrix="mixed" name="Am"></chart>
+    <chart :matrix="mixed" :name="name"></chart>
   </div>
 </template>
 
@@ -9,31 +9,28 @@ import chart from '@/components/chart.vue'
 
 export default {
   name: 'Main',
-  props: {
-    msg: String
-  },
   components: {
     chart
   },
   data () {
     return {
+      name: 'Am',
       mixed: [
-        [0, 1, 0, 1, 0, 0],
-        [0, 1, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0],
-        [1, 0, 0, 0, 0, 1]
-      ]
+        [-1, 1, 0, 0, 0, 1],
+        [0, 1, 0, 0, 0, 1],
+        [0, 0, 0, 0, 1, 0],
+        [0, 0, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0]
+      ],
+      timer: null,
+      index: 0
     }
   },
   mounted() {
-    setTimeout(() => {
-        this.mixed = [
-          [1],
-          [0, 1],
-          [0, 0, 1],
-          [0, 0, 0, 1]
-        ]
-    }, 2000)
+    // console.log(matrixs.length);
+    // this.mixed = matrixs[0].matrix;
+    // this.name = matrixs[0].name;
   }
 }
 </script>
