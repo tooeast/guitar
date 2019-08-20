@@ -32,18 +32,31 @@
             <td></td>
             <td></td>
           </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         </table>
       </div>
 
       <div class="hexian-point-wrapper">
         <table class="hexian-point">
           <tr v-for="(todo, index) in realMatrix" :key="index">
-            <td v-for="(item, key) in todo" :key="key" :class="getClassName(item)" data-num="1"></td>
+            <td v-for="(item, key) in todo" :key="key" :class="getClassName(item)" :data-num="item"></td>
           </tr>
         </table>
       </div>
 
-      <div class="hexian-prefix">1</div>
+      <div class="hexian-prefix">{{ prefix }}</div>
+    </div>
+
+    <div class="hexian-desc">
+      <p>
+        <span>{{ desc.join(', ') }}</span>
+      </p>
     </div>
   </div>
 </template>
@@ -53,16 +66,24 @@ export default {
   name: 'Chart',
   props: {
     name: {
-        type: String,
-        default: ''
+      type: String,
+      default: ''
     },
     matrix: {
-        type: Array
+      type: Array
+    },
+    prefix: {
+      type: Number,
+      default: 1
+    },
+    desc: {
+      type: Array
     }
   },
   data() {
       return {
          defaultArr: [
+            [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0],
@@ -76,8 +97,6 @@ export default {
     matrix: {
         immediate: true,
         handler (val) {
-            // console.log(val)
-            // for(let i = 0; i )
             this.realMatrix = this.defaultArr.map((todo, index) => {
                 return todo.map((item, key) => {
                     return (val[index] && val[index][key]) ? val[index][key] : item;
@@ -129,7 +148,7 @@ export default {
         tr {
           td {
             // width: 49px;
-            height: 80px;
+            height: 60px;
             border: 2px solid gray;
           }
         }
@@ -200,7 +219,7 @@ export default {
           td {
             position: relative;
             // width: 49px;
-            height: 80px;
+            height: 60px;
             border: 2px solid transparent;
 
             &.select {
@@ -212,7 +231,7 @@ export default {
                 top: 50%;
                 width: 30px;
                 height: 30px;
-                background-color: red;
+                background-color: green;
                 border-radius: 50%;
                 transform: translate(-50%, -50%);
                 color: #fff;
@@ -236,6 +255,22 @@ export default {
       text-align: center;
       font-size: 30px;
       font-weight: bold;
+    }
+  }
+
+  .hexian-desc {
+    width: 320px;
+    min-height: 70px;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background-color: #ebebeb;
+    border-radius: 4px;
+
+    p {
+      margin: 0;
+      line-height: 25px;
+      text-align: left;
     }
   }
 }
