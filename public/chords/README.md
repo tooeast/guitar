@@ -3,7 +3,7 @@
 **chords.json** 内容填充为常用和弦，结构及注释如下
 
 ```JavaScript
-"1":{
+{
     "title": "C",                 // 和弦名称
     "prefix":"1",                 // 和弦从第几品标注
     "matrix":[                    
@@ -17,5 +17,7 @@
     "description":[               // 文字版描述，暂时用数组描述，方便后面拓展
         "5弦3品"
     ]
-},
+}
 ```
+
+[reference link](http://www.798com.com/article-3030-1.html)
