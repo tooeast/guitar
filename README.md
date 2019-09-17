@@ -1,29 +1,22 @@
 # guitar
 
-## Project setup
-```
-npm install
-```
+> 一个用于记忆吉他和弦的小demo，将常用的和弦用图形的方式表现出来，便于记忆
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![示例](http://cdn.521plus.com/images/guitar-example.jpg)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+[在线预览](http://works.521plus.com/guitar)
 
-### Run your tests
-```
-npm run test
-```
+与[biao](https://github.com/guoruibiao)共同完成
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 使用
+
+```git clone git@github.com:sansiro-me/guitar.git ./guitat```
+
+```cd guitar && npm install```
+
+```npm run serve```
+
+### 构建
+
+```npm run build```
