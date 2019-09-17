@@ -1,6 +1,6 @@
 # guitar
 
-> 一个用于记忆吉他和弦的小demo，将常用的和弦用图形的方式表现出来，便于记忆
+> 一个用于记忆吉他和弦的小demo，将常用的和弦用图形的方式表现出来，便于记忆。
 
 ![示例](http://cdn.521plus.com/images/guitar-example.jpg)
 
