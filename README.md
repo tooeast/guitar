@@ -11,7 +11,7 @@
 
 ### 使用
 
-```git clone git@github.com:sansiro-me/guitar.git ./guitat```
+```git clone git@github.com:sansiro-me/guitar.git ./guitar```
 
 ```cd guitar && npm install```
 
