@@ -51,7 +51,7 @@ export default {
 
       // this.desc = data.C[this.nowIndex].description;
 
-      this.totalNum = data.C.length;
+      this.totalNum = data.length;
 
       this.initChordShow(data);
       console.log('request')
@@ -80,11 +80,11 @@ export default {
       this.updateNowInfo(this.nowIndex);
     },
     updateNowInfo(index) {
-      this.mixed = this.list.C[index].matrix;
-      this.name = this.list.C[index].title;
-      this.prefix = Number(this.list.C[index].prefix);
+      this.mixed = this.list[index].matrix;
+      this.name = this.list[index].title;
+      this.prefix = Number(this.list[index].prefix);
 
-      this.desc = this.list.C[index].description;
+      this.desc = this.list[index].description;
     }
   }
 }
